@@ -11,6 +11,7 @@ def setup():
 
 MIN = 0
 MAX = 99
+FULL_TURN = 100
 
 
 
@@ -103,14 +104,12 @@ def part2():
             # During rotation
             overflow = (current - distance) < 0 and current != 0
             if (overflow):
-                result += abs((current - distance) // (MAX+1))
-                #result += abs((current - distance) // (MAX))
+                print(f"ROTATION: {current - distance} 0 COUNT: {abs((current - distance) // FULL_TURN)}")
+                result += abs((current - distance) // (FULL_TURN))
 
-            current = ((current - distance) % (MAX+1))
+            current = ((current - distance) % (FULL_TURN))
             print("(AFTER) CURRENT", current)
 
-            # End of rotation
-            result += (current == 0 and not overflow)
 
         elif (direction == "R"):
             print(direction, distance)
@@ -118,18 +117,16 @@ def part2():
             print("(BEFORE) CURRENT", current)
 
             # During rotation
-            #overflow = (current + distance) > MAX and current != 0
             overflow = (current + distance) > MAX
             if (overflow):
-                result += (current + distance) // (MAX+1)
-                #result += (current + distance) // (MAX)
+                print(f"ROTATION: {current + distance} 0 COUNT: {(current + distance) // FULL_TURN }")
+                result += (current + distance) // (FULL_TURN)
 
-            current = (current + distance) % (MAX+1)
+            current = (current + distance) % (FULL_TURN)
             print("(AFTER) CURRENT", current)
 
-            # End of rotation
-            result += (current == 0 and not overflow)
-
+        # End of rotation
+        result += (current == 0 and not overflow)
 
         print()
     print("DAY2: ", result)
