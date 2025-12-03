@@ -20,13 +20,13 @@ class Joltage:
         self.m1 = 0
         self.m2 = 0
 
+
     def print(self):
         print(f"I:{self.i1} M:{self.m1}")
         print(f"I:{self.i2} M:{self.m2}")
 
 
 def part1():
-    jolatages = []
     result = 0
 
     for bank in lines:
@@ -60,10 +60,62 @@ def part1():
     print("DAY 3 PART 1 RESULT: ", result)
 
 
+"""
+Think about it as turning off minimums
+
+class NumInfo:
+    def __init__(self, index, num):
+        self.index = index
+        self.num = num
+
+    def print(self):
+        print(f"INDEX: {self.index} NUM: {self.num}")
+
+class Disable:
+    def __init__(self):
+        self.n1 = NumInfo(-1, 99999)
+        self.n2 = NumInfo(-1, 99999)
+        self.n3 = NumInfo(-1, 99999)
+
+    def print(self):
+        self.n1.print()
+        self.n2.print()
+        self.n3.print()
+"""
+
 def part2():
+
     result = 0
+    for (_idx, bank) in enumerate(lines):
+        new_bank = [int(x) for x in bank.strip()]
+        remove_cnt = 0
+
+        i = 0
+        while (i < len(new_bank) - 1):
+            print(f"I: {i} LEFT: {new_bank[i]} RIGHT: {new_bank[i+1]}")
+            if remove_cnt == 3:
+                break
+
+            if (new_bank[i] <= new_bank[i+1]):
+                """
+                print("POP:", i,  "NUM: ", new_bank[i])
+                print(new_bank)
+                print()
+                """
+                new_bank.pop(i);
+                remove_cnt += 1
+                continue
+
+
+            i += 1
+
+
+        result += int("".join(map(str, new_bank)))
+        print(new_bank)
+        print()
+
+
     print("DAY 3 PART 2 RESULT: ", result)
-    pass
 
 
 part1()
