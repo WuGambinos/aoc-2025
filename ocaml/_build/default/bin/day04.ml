@@ -20,12 +20,9 @@ let string_to_char_list s =
   loop (len - 1) []
 ;;
 
-let get_list string_list = List.map ~f:string_to_char_list string_list
+let convert_list string_list = List.map ~f:string_to_char_list string_list
 
-let () =
-  let lines = Advent.read_file "../day4_input.txt" in
-  let lines = List.map ~f:String.strip lines in
-  let lines = get_list lines in
+let part1 lines =
   let num_row = List.length lines in
   let num_col = List.length (List.hd_exn lines) in
   let answer =
@@ -52,5 +49,13 @@ let () =
       outer_acc + acc)
   in
   answer |> string_of_int |> Stdio.print_endline;
+  ()
+;;
+
+let () =
+  let lines = Advent.read_file "../day4_input.txt" in
+  let lines = List.map ~f:String.strip lines in
+  let lines = convert_list lines in
+  part1 lines;
   ()
 ;;
