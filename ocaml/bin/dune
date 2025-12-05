@@ -1,0 +1,4 @@
+(executables
+  (public_names main day04)
+  (names main day04)
+  (libraries advent base stdio core))
