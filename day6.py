@@ -1,7 +1,4 @@
 #filename = 'day6_input.txt'
-from typing import final
-
-
 filename = 'day6_test.txt'
 
 f = open(filename, 'r')
@@ -10,21 +7,23 @@ lines = []
 
 def setup():
     for line in f:
-        line = line.strip()
+        #line = line.strip()
         lines.append(line)
 
 setup()
+
 
 # More Setup
 operations = lines.pop()
 matrix = []
 for line in lines:
     line = line.split(" ")
-    line  = [int(x) for x in line if x]
+    line  = ['0' if x == ''  else x for x in line]
+    print(line)
     matrix.append(line)
 
 
-
+"""
 def transpose(og_matrix):
     rows = len(og_matrix)
     cols = len(og_matrix[0])
@@ -114,22 +113,6 @@ def part2(m):
 
 
 
-    """
-    intermed_matrix_2 = []
-    for block in intermed_matrix:
-        inner = []
-        for row in block:
-            inner.append(list(reversed(row)))
-        intermed_matrix_2.append(inner)
-
-    for block in intermed_matrix_2:
-        for row in block:
-            print(row)
-        print()
-    """
-
-
-    """
     final_matrix = []
     for block in intermed_matrix:
         inner = []
@@ -155,10 +138,10 @@ def part2(m):
 
         print("RESULT", result)
     print("DAY 6 PART 2 Result", total)
-    """
 
 
 
 #part1()
 part2(matrix)
+"""
 
