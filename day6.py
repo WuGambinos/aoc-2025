@@ -1,9 +1,30 @@
 #filename = 'day6_input.txt'
+from os import wait
+
+
 filename = 'day6_test.txt'
 
 f = open(filename, 'r')
-
 lines = []
+
+def square_transpose(m):
+    for i in range(len(m)):
+        for j in range(i + 1, len(m[0])):  # Start from i+1, not 0
+            m[i][j], m[j][i] = m[j][i], m[i][j]  # Swap simultaneously
+
+def transpose(og_matrix):
+    rows = len(og_matrix)
+    cols = len(og_matrix[0])
+    result_matrix = [['0' for _ in range(rows)] for _ in range(cols)]
+    for (i, row) in enumerate(og_matrix):
+        for (j, _item) in enumerate(row):
+            result_matrix[j][i] = og_matrix[i][j]
+
+    return result_matrix
+
+def print_list(lst):
+    for row in lst:
+        print(row)
 
 def setup():
     for line in f:
@@ -16,12 +37,76 @@ setup()
 # More Setup
 operations = lines.pop()
 matrix = []
+max_digits = 0
+
+get_len = lines[0].split(" ")
+relevant = []
+for e in get_len:
+    if e and e != '\n':
+        relevant.append(e)
+
+num_cols = len(relevant)
+print("NUMBER COLS", num_cols)
+print()
+
 for line in lines:
     line = line.split(" ")
+    for num in line:
+        num = num.strip()
+        if len(num) > max_digits:
+            max_digits = len(num)
+
     line  = ['0' if x == ''  else x for x in line]
+    #line.pop()
     print(line)
     matrix.append(line)
 
+print("MAX DIGITS", max_digits)
+print()
+
+new_lst = []
+
+for row in matrix:
+    s = ""
+    for item in row:
+        s += item
+
+    new_lst.append(list(s))
+
+print_list(new_lst)
+
+# numbers = []
+# for row in new_lst:
+#     curr_num = ""
+#     print("ROW", row)
+#     for (j, item) in  enumerate(row):
+#         print("J: ", j, "len", len(row))
+#         curr_num += item
+#         if len(curr_num) == max_digits:
+#             print("CURR NUM", curr_num)
+#             numbers.append(curr_num)
+#             curr_num = ""
+#         elif len(curr_num) == max_digits - 1 and j == len(row) - 1:
+#             curr_num += '0'
+#             numbers.append(curr_num)
+#             curr_num = ""
+#     print("NUM", curr_num)
+#     if (curr_num):
+#         numbers.append(curr_num)
+#
+# print(numbers)
+
+#
+# new_numbers = []
+#
+# inner = []
+# for n in numbers:
+#     inner.append(n)
+#     if len(inner) > num_cols:
+#         new_numbers.append(inner)
+#         inner = []
+#
+# print(new_numbers)
 
 """
 def transpose(og_matrix):
@@ -34,10 +119,6 @@ def transpose(og_matrix):
 
     return result_matrix
 
-def square_transpose(m):
-    for i in range(len(m)):
-        for j in range(i + 1, len(m[0])):  # Start from i+1, not 0
-            m[i][j], m[j][i] = m[j][i], m[i][j]  # Swap simultaneously
 
 transposed = transpose(matrix)
 
